@@ -23,11 +23,6 @@ public class TollBothController {
 		return tollTokenService.saveToken(tollToken);
 	}
 	
-	@PutMapping("/update/")
-	public TollToken updateTollTokenHandler(@RequestBody TollToken tollToken) {
-		return tollTokenService.updateTollToken(tollToken);
-	}
-    
 	@GetMapping("/get")
 	public List<TollToken> getTollTokenHandler(){
 		return tollTokenService.getAllTollToken();

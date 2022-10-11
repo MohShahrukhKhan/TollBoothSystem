@@ -24,14 +24,15 @@ public class VehicleOwner {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer Owner_Id;
+	private Integer RFID;
 	private String OwnerName;
 	private String moblieNo;
 	private String vehicleType;
+	private String numberPlate;
 	private double wallet;
-	
-	@ManyToMany(mappedBy = "vehicleOwner", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-	private List<TollToken> tolltoken =new ArrayList<>();
+//	
+//	@ManyToMany(mappedBy = "vehicleOwner", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+//	private List<TollToken> tolltoken =new ArrayList<>();
 	
 
 }

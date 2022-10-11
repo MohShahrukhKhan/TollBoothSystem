@@ -12,5 +12,6 @@ public class TollBoothSystemRestApiApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TollBoothSystemRestApiApplication.class, args);
 	}
-
+	
+	
 }

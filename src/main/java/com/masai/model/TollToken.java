@@ -30,10 +30,12 @@ public class TollToken {
 	private double charge;
 	private String vehicleType;
 	private String booth_location;
-    
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-	private List<VehicleOwner> vehicleOwner =new ArrayList<>();
-	
+	private Integer tollBooth_No;
+	private Integer RFID;
+//    
+//	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+//	private List<VehicleOwner> vehicleOwner =new ArrayList<>();
+//	
 
 	
 
