@@ -8,6 +8,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.masai.exception.VehicleOwnerException;
 import com.masai.model.TollToken;
 import com.masai.model.VehicleOwner;
 import com.masai.repository.TolltokenDAO;
@@ -63,7 +64,7 @@ public class TollTokenServiceImp implements TollTokenService{
 							message= tolltokenDAO.save(tolltoken);
 							
 						}else {
-							//throw exception fail;
+							throw new VehicleOwnerException("oops !Low Balance in your wallet");
 						}
 					}
 					
@@ -75,13 +76,13 @@ public class TollTokenServiceImp implements TollTokenService{
 						owner.setWallet(owner.getWallet()-charges.get(vehicle));
 						message= tolltokenDAO.save(tolltoken);
 					}else {
-						//throw exception fail;
+						throw new VehicleOwnerException("oops !Low Balance in your wallet");
 					}
 				}
 				
 		}else {
 				if(charges.containsKey(tolltoken.getVehicleType())) {
-					
+					throw new VehicleOwnerException("Please register your vehicle in RFID");
 					
 				}else {
 					message= tolltokenDAO.save(tolltoken);

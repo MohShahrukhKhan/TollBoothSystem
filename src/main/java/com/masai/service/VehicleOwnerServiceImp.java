@@ -5,6 +5,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.masai.exception.VehicleOwnerException;
+import com.masai.exception.ownerNotFoundException;
 import com.masai.model.VehicleOwner;
 import com.masai.repository.VehicleOwnerDAO;
 @Service
@@ -20,7 +22,7 @@ public class VehicleOwnerServiceImp implements VehicleOwnerService{
 		if(!opt.isPresent()) {
 			return vehicleOwnerDAO.save(vehicleOwner);
 		}else {
-			return null;
+			throw new VehicleOwnerException("Owner already exits!");
 		}
 		
 	}
@@ -32,7 +34,7 @@ public class VehicleOwnerServiceImp implements VehicleOwnerService{
 		if(opt.isPresent()) {
 			return vehicleOwnerDAO.save(vehicleOwner);
 		}else {
-			return null;
+			throw new ownerNotFoundException("Onwer Not exits!");
 		}
 	}
 
@@ -44,7 +46,7 @@ public class VehicleOwnerServiceImp implements VehicleOwnerService{
 			vehicleOwnerDAO.deleteById(id);
 			
 		}else {
-			
+			throw new ownerNotFoundException("Onwer Not exits!");
 		}
 		
 		return owner;
@@ -54,7 +56,13 @@ public class VehicleOwnerServiceImp implements VehicleOwnerService{
 	@Override
 	public VehicleOwner getVehicleOwner(Integer id) {
 		// TODO Auto-generated method stub
-		return vehicleOwnerDAO.findById(id).get();
+		Optional<VehicleOwner> opt=vehicleOwnerDAO.findById(id);
+		if(opt.isPresent()) {
+			return opt.get();
+		}else {
+			throw new ownerNotFoundException("Onwer Not exits!");
+		}
+		
 	}
 
 }
