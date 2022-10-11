@@ -1,6 +1,8 @@
 package com.masai.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,13 +21,14 @@ public class UserController {
 	private VehicleOwnerService vehicleOwnerService;
 	
 	@GetMapping("/getUser/{RFID}")
-	public VehicleOwner getVehicleOwnerHandle(@PathVariable("RFID") Integer RFID) {
-		return vehicleOwnerService.getVehicleOwner(RFID);
-		
+	public ResponseEntity<VehicleOwner> getVehicleOwnerHandle(@PathVariable("RFID") Integer RFID) {
+		return new ResponseEntity<>(vehicleOwnerService.getVehicleOwner(RFID), HttpStatus.ACCEPTED);
+
 	}
 	@PostMapping("/saveUser")
-	public VehicleOwner saveVehicleOwnerHandler(@RequestBody VehicleOwner vehicleOwner) {
-		return vehicleOwnerService.saveVehicleOwner(vehicleOwner);
+	public ResponseEntity<VehicleOwner> saveVehicleOwnerHandler(@RequestBody VehicleOwner vehicleOwner) {
+		return new ResponseEntity<>(vehicleOwnerService.saveVehicleOwner(vehicleOwner), HttpStatus.CREATED);
+	
 	}
 	
 	@PutMapping("/updateUser")
@@ -34,8 +37,8 @@ public class UserController {
 	}
 	
 	@DeleteMapping("/deleteUser/{RFID}")
-	public VehicleOwner deleteVehicleOwnerHandler(@PathVariable("RFID") Integer RFID ) {
-		return vehicleOwnerService.deleteVehicleOwnerById(RFID);
+	public ResponseEntity<VehicleOwner> deleteVehicleOwnerHandler(@PathVariable("RFID") Integer RFID ) {
+		return new ResponseEntity<>(vehicleOwnerService.deleteVehicleOwnerById(RFID), HttpStatus.ACCEPTED);
 	}
 
 }

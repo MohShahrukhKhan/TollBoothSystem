@@ -3,6 +3,8 @@ package com.masai.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,13 +20,16 @@ public class TollBothController {
 	@Autowired
 	private TollTokenService tollTokenService;
 	
-	@PostMapping("/save")
-	public TollToken saveTollTokenHandler(@RequestBody TollToken tollToken) {
-		return tollTokenService.saveToken(tollToken);
+	@PostMapping("/saveTollToken")
+	public ResponseEntity<TollToken> saveTollTokenHandler(@RequestBody TollToken tollToken) {
+		return new ResponseEntity<>(tollTokenService.saveToken(tollToken), HttpStatus.CREATED);
+	
 	}
 	
-	@GetMapping("/get")
+	@GetMapping("/getTollTokens")
 	public List<TollToken> getTollTokenHandler(){
 		return tollTokenService.getAllTollToken();
 	}
+	
+	
 }
